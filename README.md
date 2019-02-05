@@ -5,7 +5,7 @@ Attempting make a opensource alternative to Mendeley, Zotero
 
 Dependencies : python3-poppler-qt5, PyQt5 for python3, python3-feedparser, habanero
 
-(https://github.com/srbhp/PiePdf/raw/master/Screenshot.png)
+![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/Screenshot.png)
 
 
 

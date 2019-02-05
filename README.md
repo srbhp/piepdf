@@ -1,2 +1,5 @@
-# PiePdf
-Pdf manager for research article 
+# pdfscholar
+Manage Research Articles  
+
+Requirements :
+python3-poppler-qt5

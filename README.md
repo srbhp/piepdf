@@ -10,11 +10,11 @@ Dependencies : python3-poppler-qt5, PyQt5 for python3, python3-feedparser, haban
 Instalation :
 
 
-```git clone https://github.com/srbhp/PiePdf.git
+`git clone https://github.com/srbhp/PiePdf.git
 
 cd PiePdf
 
-python3 mainwindow.py```
+python3 mainwindow.py`
 
 ![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/Screenshot.png)
 

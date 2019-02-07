@@ -20,6 +20,7 @@ By default it will create a folder `PiePdf`
  You have keep all your pdfs in this directory. *PiePdf* will fetch metadata autometically 
  from crossref or arXiv for each pdf.
 
-
-
+## You should know 
+*PiePdf* configuration file is `~/.config/piepdf/piepdf.conf`
+*PiePdf* database file is `~/.config/piepdf/piepdf_database/piepdf.db`
 credit: Icons : http://openclipart.org/

@@ -22,5 +22,7 @@ By default it will create a folder `PiePdf`
 
 ## You should know 
 *PiePdf* configuration file is `~/.config/piepdf/piepdf.conf`
+
 *PiePdf* database file is `~/.config/piepdf/piepdf_database/piepdf.db`
+
 credit: Icons : http://openclipart.org/

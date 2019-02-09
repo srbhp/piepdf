@@ -1,4 +1,7 @@
 # PiePdf
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/35a5a955bd8a42d196129f5c9d975329)](https://app.codacy.com/app/pradhanphy/PiePdf?utm_source=github.com&utm_medium=referral&utm_content=srbhp/PiePdf&utm_campaign=Badge_Grade_Dashboard)
+
 Manage Research Articles  and fetch metadata from the internet(currently crossref and arXiv is supported). 
 
 Attempt to  make a opensource an alternative to Mendeley, Zotero.

@@ -11,7 +11,7 @@ python3-poppler-qt5, PyQt5 for python3, python3-feedparser, habanero
 
 `pip3 install habanero PyQt5 python-poppler-qt5 feedparser`
 
-## Instalation :
+## Instalation 
 ```
 git clone https://github.com/srbhp/PiePdf.git
 cd PiePdf

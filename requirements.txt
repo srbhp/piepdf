@@ -1,1 +1,4 @@
-habanero PyQt5 python-poppler-qt5 feedparser
+habanero
+PyQt5 
+python-poppler-qt5 
+feedparser

@@ -153,7 +153,7 @@ class DatabaseInit(QtCore.QRunnable):
         slist=[]
         with sqlite3.connect(self.database_path) as db :
             cursor = db.cursor()
-            cursor.execute("SELECT * FROM pdffulltext WHERE Path LIKE '%{:s}%'".format(string))
+            cursor.execute("SELECT * FROM pdffulltext WHERE Path LIKE ?",('%{}%'.format(string),) )
             for f in cursor.fetchall():
                 slist.append(f)
         return slist

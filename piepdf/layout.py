@@ -146,7 +146,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.actionAbout_Qt.setText(_translate("MainWindow", "About Qt"))
 
 
-    def saveSession(self,MainWindow):
+    def saveSession(self):
         settings =QtCore.QSettings("piepdf", "piepdf")
         settings.beginGroup('mainWindow')
         settings.setValue("splitter1Settings",self.splitter1.saveState())

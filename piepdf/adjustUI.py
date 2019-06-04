@@ -31,7 +31,6 @@ class Adjust_UI(object):
         self.parent_ui.restoreSession()
         self.piepdf_path  = self.parent_ui.PiePdf_Path 
         os.makedirs(self.piepdf_path, exist_ok=True)
-        print(self.piepdf_path )
 
         self.parent_ui.listView.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.parent_ui.listView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
@@ -58,8 +57,6 @@ class Adjust_UI(object):
          """ 
     def decorateMain(self):
             self.threadpool = QtCore.QThreadPool()
-            print(self.parent_ui.PiePdf_Path)
-            print(self.piepdf_path)
             self.piepdf_db = sqldb.DatabaseInit(self.piepdf_path,email = self.parent_ui.emailaddress)
             self.threadpool.start( self.piepdf_db )
             self.piepdf_db.signals.status.connect(self.dbStatus)
@@ -73,20 +70,17 @@ class Adjust_UI(object):
         self.actionSetting.triggered.connect(self.openSettingWindow)
         self.parent_ui.mainToolBar.addAction(self.actionSetting)
     def openSettingWindow(self ):
-        print("Opening Setting Window")   
         self.settings_ui = settings.Ui_SettingWindow()
         self.settings_ui.setupUi()
         #self.parent_ui.setEnabled(False)
         self.settings_ui.show() 
 
     def dbStatus(self,obj):
-        print(obj)
         #QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.BusyCursor)        
         #QtWidgets.QApplication.restoreOverrideCursor()
         self.parent_ui.statusBar.showMessage(obj)
     def dbFinish(self,obj):
         #QtWidgets.QApplication.processEvents()
-        print(obj)
         self.parent_ui.statusBar.showMessage(obj)
         #Update main window after database work  finished
         self.updateWidgets( )
@@ -217,19 +211,13 @@ class Adjust_UI(object):
         except :
             print ("Meta Signal Failed " )
     def trsignal1(self):
-        print("Signal 1 Triggered ")
         item = self.parent_ui.treeView.selectedIndexes()[0]
         subrootpath = self.model.filePath(item)
-        print(self.model.filePath(item))
         self.model_2.setRootPath(subrootpath)
         self.parent_ui.treeView_2.setRootIndex(self.model_2.index(subrootpath))
         self.update_listview(subrootpath)
-        # print(QFileSystemModel.fetchMore(item.parent()) )
-        # print( item.model().itemFromIndex(index).text())
-
 
     def tr2_signal1(self):
-        print("Signal 1 Triggered ")
         item = self.parent_ui.treeView_2.selectedIndexes()[0]
         subrootpath = self.model_2.filePath(item)
         self.update_listview(subrootpath)
@@ -273,7 +261,10 @@ class Adjust_UI(object):
         self.parent_ui.tabWidget.setCurrentIndex(0)
         self.parent_ui.tabWidget.tabCloseRequested.connect( self.removeTab )
         self.parent_ui.treeView.activated.connect( self.trsignal1 )
+        self.parent_ui.treeView.selectionModel().selectionChanged.connect( self.trsignal1 )
         self.parent_ui.treeView_2.activated.connect( self.tr2_signal1)
+        self.parent_ui.treeView_2.selectionModel().selectionChanged.connect(
+        self.tr2_signal1 )
         self.parent_ui.listView.doubleClicked.connect( self.filesignal )
         self.parent_ui.listView.clicked.connect(self.metaSignal )
         self.parent_ui.listView.selectionModel().selectionChanged.connect(self.metaSignal )

@@ -17,6 +17,5 @@ if __name__ == "__main__":
     #QtWidgets.QShortcut("Ctrl+Q", w, activated=w.close)
     Mainwindow.show()
     #spdfMainwindow.restoreSession()
-    #print((w.height(),w.width() ))
-    #app.aboutToQuit.connect(lambda: spdfMainwindow.saveSession(w))
+    app.aboutToQuit.connect( Mainwindow.saveSession)
     sys.exit(app.exec_())

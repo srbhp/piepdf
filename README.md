@@ -9,7 +9,16 @@ Attempt to  make a opensource an alternative to Mendeley, Zotero.
 ## Dependencies 
 python3-poppler-qt5, PyQt5 for python3, python3-feedparser, habanero
 
+### fedora
+
 `pip3 install habanero PyQt5 python-poppler-qt5 feedparser`
+
+### openseuse
+
+```
+pip3 install habanero 
+zypper in python3-poppler-qt5 python3-feedparser python3-qt5
+```
 
 ## Instalation 
 ```

@@ -66,7 +66,6 @@ class Ui_SettingWindow(QtWidgets.QMainWindow):
         print(path)   
         if path is not None :
             self.mainpdfPath.setText(path)
-        
     def saveSetting(self):
         settings =QtCore.QSettings("piepdf", "piepdf")
         settings.beginGroup('Settings')
@@ -89,7 +88,7 @@ class Ui_SettingWindow(QtWidgets.QMainWindow):
         except : 
             print ("Failed (3) ")
         print ( settings.value("PiePdf_Path") )
-        if settings.value("PiePdf_Path") is None or " ":
+        if settings.value("PiePdf_Path") is None :
             self.mainpdfPath.setText(os.path.expanduser("~/PiePdf"))
         settings.endGroup()
     def closeEvent(self, event):

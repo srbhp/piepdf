@@ -24,7 +24,7 @@ zypper in python3-poppler-qt5 python3-feedparser python3-qt5
 ```
 git clone https://github.com/srbhp/PiePdf.git
 cd PiePdf
-python3 mainwindow.py
+python3 piepdf/mainwindow.py
 ```
 By default it will create a folder `PiePdf`
  in your home directory. You can change this default directory to any `Path` from the settiing menu.

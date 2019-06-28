@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
-from piepdf.pdfviewer import pdfviewer
-from piepdf import infoWidget, settings
+from pdfviewer import pdfviewer
+import infoWidget, settings
 from PyQt5 import QtCore, QtGui, QtWidgets
-import piepdf.database.sql as sqldb
+import database.sql as sqldb
 import time 
 import os 
 

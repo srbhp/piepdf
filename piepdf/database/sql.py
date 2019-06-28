@@ -3,7 +3,7 @@ import time
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
 import os
-from piepdf.database import metadata
+from database import metadata
 
 
 DATABASE_PATH = QtCore.QStandardPaths.standardLocations( QtCore.QStandardPaths.ConfigLocation)[0] + '/piepdf/piepdf_database'

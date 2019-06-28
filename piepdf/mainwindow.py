@@ -2,8 +2,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-import piepdf.layout as wlayout
-import piepdf.adjustUI as adjustUI
+import layout as wlayout
+import adjustUI as adjustUI
 import os
 import sys
 

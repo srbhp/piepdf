@@ -2,8 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import popplerqt5
 import time
 import sys
-from piepdf.pdfviewer.fixedARLabel import ThumbWidget
-import piepdf.pdfviewer.threadedRender as threaded
+from pdfviewer.fixedARLabel import ThumbWidget
+import pdfviewer.threadedRender as threaded
 
 
 class Ui_MainWindow(object):

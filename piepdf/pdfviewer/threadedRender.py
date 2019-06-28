@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from piepdf.pdfviewer.fixedARLabel import  ImageWidget
+from pdfviewer.fixedARLabel import  ImageWidget
 
 class WorkerSignals(QtCore.QObject):
     finished = QtCore.pyqtSignal(object)

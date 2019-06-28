@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
-from piepdf import infoWidget
+import infoWidget
 import os 
 
 class Ui_MainWindow(QtWidgets.QMainWindow):

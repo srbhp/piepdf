@@ -93,6 +93,7 @@ class DatabaseInit(QtCore.QRunnable):
                             VALUES(?,?,?,?,?,?,?,?,?,?);''',
                             (filepath1,info['title'],info['author'],info['year'],info['abstract'],info['doi'],info['url'],info['journal'],"",""))
 
+                        time.sleep(5)
                 else:
                     print("Removed File : {} ".format(  filepath1 ))
         db.commit()
@@ -133,6 +134,7 @@ class DatabaseInit(QtCore.QRunnable):
                     Journal, Tags, Notes )
                           VALUES(?,?,?,?,?,?,?,?,?,?);''',
                           (filepath1,info['title'],info['author'],info['year'],info['abstract'],info['doi'],info['url'],info['journal'],"",""))
+                    time.sleep(5)
         db.commit()
         db.close()
 

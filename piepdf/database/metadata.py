@@ -60,8 +60,8 @@ class GetPdfInfo(object):
                 self.getMetadataQuery(qrtext)
         return self.metadata
     def getMetadataDoi(self,doiNo):
-        crdata = self.crossrefApi.works(ids = doiNo,  format="bibentry")
         try :
+            crdata = self.crossrefApi.works(ids = doiNo,  format="bibentry")
             tm1 = crdata['message']
             self.metadata['title'] = tm1['title'][0]
             self.metadata['doi'] = tm1['DOI']

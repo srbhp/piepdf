@@ -183,7 +183,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             self.PiePdf_Path = settings.value("PiePdf_Path")
         except :
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
-        if self.PiePdf_Path is None  or " ":
+        if self.PiePdf_Path is None :
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
         try :
             self.usePdfViewer = int(settings.value("PdfViewerState")) is 2

@@ -42,6 +42,7 @@ class DatabaseInit(QtCore.QRunnable):
         self.fileSysWatcher = QtCore.QFileSystemWatcher()
         self.fileSysWatcher.addPaths(self.dirList)
         self.fileSysWatcher.directoryChanged.connect(self.slotDirChanged)
+        self.fileSysWatcher.fileChanged.connect(self.slotDirChanged)
         
         #self.deleteDatabase()
         #self.createDatabase()
@@ -82,13 +83,15 @@ class DatabaseInit(QtCore.QRunnable):
             for filepath1 in chFiles :
                 print("Folder changed")
                 if filepath1 in self.fileList:
-                    print("added file : {} ".format(  filepath1 ))
-                    info = self.crMetadata.getMetadata(filepath1 )
-                    db.execute('''INSERT INTO
-                    pdffulltext( Path, Title, Author, Year, Abstract, Doi, Url,
-                    Journal, Tags, Notes )
-                          VALUES(?,?,?,?,?,?,?,?,?,?);''',
-                          (filepath1,info['title'],info['author'],info['year'],info['abstract'],info['doi'],info['url'],info['journal'],"",""))
+                    extension = os.path.splitext(filepath1)[1]
+                    if '.pdf' == extension :
+                        print("added file : {} ".format(  filepath1 ))
+                        info = self.crMetadata.getMetadata(filepath1 )
+                        db.execute('''INSERT INTO
+                        pdffulltext( Path, Title, Author, Year, Abstract, Doi, Url,
+                        Journal, Tags, Notes )
+                            VALUES(?,?,?,?,?,?,?,?,?,?);''',
+                            (filepath1,info['title'],info['author'],info['year'],info['abstract'],info['doi'],info['url'],info['journal'],"",""))
 
                 else:
                     print("Removed File : {} ".format(  filepath1 ))

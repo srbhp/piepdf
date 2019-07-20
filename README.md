@@ -1,5 +1,4 @@
 # PiePdf
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/36f93601e6094cf0aec4e4c4003943f4)](https://www.codacy.com/app/pradhanphy/PiePdf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=srbhp/PiePdf&amp;utm_campaign=Badge_Grade)
 
 Manage Research Articles  and fetch metadata from the internet(currently crossref and arXiv is supported). 
 

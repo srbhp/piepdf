@@ -6,11 +6,28 @@ import feedparser
 from habanero import Crossref
 import time
 
+import requests
+import logging
+import httplib2 as http_client
+http_client.HTTPConnection.debuglevel = 1
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
+
+import requests
+import logging
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
 
 class GetPdfInfo(object):
     def  __init__(self,ifparent=None,email = ""):
         self.mailto = email
         self.arXivApi = "http://export.arxiv.org/api/query?id_list="
+
         self.crossrefApi = Crossref( mailto=self.mailto)
         self.metadata= {'doi':'', 'url':'', 'year':'',
             'journal':'', 'author':'', 'title':'','abstract':''}

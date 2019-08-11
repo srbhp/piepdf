@@ -2,7 +2,7 @@
 
 Manage Research Articles  and fetch metadata from the internet(currently crossref and arXiv is supported). 
 
-Attempt to  make a opensource an alternative to Mendeley, Zotero.
+Attempt to  make an opensource alternative to Mendeley, Zotero.
 
 ![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/Screenshot.png)
 ## Dependencies 

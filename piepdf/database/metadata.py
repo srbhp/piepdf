@@ -9,7 +9,7 @@ import time
 import requests
 import logging
 import httplib2 as http_client
-http_client.HTTPConnection.debuglevel = 1
+#http_client.HTTPConnection.debuglevel = 1
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 requests_log = logging.getLogger("requests.packages.urllib3")
@@ -79,17 +79,18 @@ class GetPdfInfo(object):
     def getMetadataDoi(self,doiNo):
         try :
             crdata = self.crossrefApi.works(ids = doiNo,  format="bibentry")
+            print (crdata)
             tm1 = crdata['message']
             self.metadata['title'] = tm1['title'][0]
             self.metadata['doi'] = tm1['DOI']
-            self.metadata['page'] = tm1['page']
             self.metadata['volumn'] = tm1['volume']
             self.metadata['author'] = " and ".join([i['given']+" " + i['family'] for i in tm1['author'] ])
             self.metadata['journal'] = tm1['publisher']
             self.metadata['url'] = "https://dx.doi.org/"+tm1['DOI']
             self.metadata['year']=tm1['published-online']['date-parts'][0][0]
+            self.metadata['page'] = tm1['page']
         except:
-            print("Failed ...... ")
+            print("Failed ...... getMetadataDoi")
     def getMetadataQuery(self,qr):
         print(qr )
         qrresult =  self.crossrefApi.works(query=qr,limit=1,sort="relevance",format="bibentry")
@@ -164,5 +165,5 @@ class GetPdfInfo(object):
                 self.metadata['url'] = 'https://arxiv.org/abs/'+arNo
                 self.metadata['doi'] = result['arxiv_doi']
             except :
-                print("Failed " )
+                print("Failed to get metadata from arxiv  " )
         return arNo

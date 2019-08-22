@@ -36,3 +36,8 @@ By default it will create a folder `PiePdf`
 
 *PiePdf* database file is `~/.config/piepdf/piepdf_database/piepdf.db`
 
+
+## TODO 
+
+[] Add metadata providers 
+[] Fix Pdf reader performance 

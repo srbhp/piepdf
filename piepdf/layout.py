@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import infoWidget
-import os 
+import os
+
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
     resized = QtCore.pyqtSignal()
-    def  __init__(self):
+
+    def __init__(self):
         super(Ui_MainWindow, self).__init__()
+
     def setupUi(self):
         self.setObjectName("MainWindow")
-        #sizeObject = QtWidgets.QDesktopWidget().screenGeometry(-1)
-        #self.resize(int(sizeObject.height()*0.8),int(sizeObject.width()*0.5))
+        # sizeObject = QtWidgets.QDesktopWidget().screenGeometry(-1)
+        # self.resize(int(sizeObject.height()*0.8),int(sizeObject.width()*0.5))
         self.setUnifiedTitleAndToolBarOnMac(True)
         self.centralWidget = QtWidgets.QWidget(self)
         self.centralWidget.setObjectName("centralWidget")
@@ -30,7 +33,9 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.splitter.setStyleSheet("QSplitter::handle { image: none; }")
 
         self.tabWidget = QtWidgets.QTabWidget(self.splitter)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
@@ -43,19 +48,19 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.tabWidget.setObjectName("tabWidget")
         self.bookmarkTab = QtWidgets.QWidget()
         self.bookmarkTab.setObjectName("Main Projects")
-        self.verticalLayout_3 = QtWidgets.QGridLayout( self.bookmarkTab)
+        self.verticalLayout_3 = QtWidgets.QGridLayout(self.bookmarkTab)
         self.verticalLayout_3.setContentsMargins(2, 2, 2, 2)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
 
         self.treeView = QtWidgets.QTreeView()
         self.treeView_2 = QtWidgets.QTreeView()
-        #self.treeView.setEnabled(False)
+        # self.treeView.setEnabled(False)
         self.listView = QtWidgets.QTableView()
         self.listView.setSortingEnabled(True)
-        #self.listView = QtWidgets.QListView()
+        # self.listView = QtWidgets.QListView()
         self.graphicsView = infoWidget.InfoWindow()
-        #self.listView.setEnabled(False)
+        # self.listView.setEnabled(False)
         self.splitter1 = QtWidgets.QSplitter(QtCore.Qt.Vertical)
         self.splitter1.addWidget(self.treeView)
         self.splitter1.addWidget(self.treeView_2)
@@ -76,8 +81,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.verticalLayout_3.addWidget(self.graphicsView,0,2,2,1)
         """
         self.tabWidget.addTab(self.bookmarkTab, "Main Window ")
-        self.tabWidget.tabBar().setTabButton(0,QtWidgets.QTabBar.RightSide,None)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.tabWidget.tabBar().setTabButton(0, QtWidgets.QTabBar.RightSide, None)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(10)
         sizePolicy.setVerticalStretch(0)
         self.verticalLayout_2.addWidget(self.splitter)
@@ -92,7 +99,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.menuHelp.setObjectName("menuHelp")
         self.menuView = QtWidgets.QMenu(self.menuBar)
         self.menuView.setObjectName("menuView")
-        #self.setMenuBar(self.menuBar)
+        # self.setMenuBar(self.menuBar)
         self.mainToolBar = QtWidgets.QToolBar(self)
         self.mainToolBar.setMovable(False)
         self.mainToolBar.setFloatable(False)
@@ -102,8 +109,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.statusBar.setObjectName("statusBar")
         self.setStatusBar(self.statusBar)
         self.actionHome = QtWidgets.QAction(self)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("piepdf/icons/home.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon = QtGui.QIcon.fromTheme("go-home")
         self.actionHome.setIcon(icon)
         self.actionHome.setObjectName("actionHome")
         self.actionQuit = QtWidgets.QAction(self)
@@ -113,25 +119,25 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.actionAbout_Qt = QtWidgets.QAction(self)
         self.actionAbout_Qt.setObjectName("actionAbout_Qt")
         self.search_list = QtCore.QStringListModel()
-        self.search_list.setStringList(['some', 'words', 'in', 'my', 'dictionary'])
+        self.search_list.setStringList(["some", "words", "in", "my", "dictionary"])
         completer = QtWidgets.QCompleter()
         completer.setModel(self.search_list)
-        self.setWindowIcon(QtGui.QIcon('piepdf/icons/mainicon.svg'))
-
+        self.setWindowIcon(QtGui.QIcon.fromTheme("applications-office"))
         self.menuFile.addAction(self.actionHome)
         self.menuFile.addAction(self.actionQuit)
         self.menuHelp.addAction(self.actionAbout)
         self.menuHelp.addAction(self.actionAbout_Qt)
         self.menuView.addSeparator()
-        #self.menuBar.addAction(self.menuFile.menuAction())
-        #self.menuBar.addAction(self.menuView.menuAction())
-        #self.menuBar.addAction(self.menuHelp.menuAction())
+        # self.menuBar.addAction(self.menuFile.menuAction())
+        # self.menuBar.addAction(self.menuView.menuAction())
+        # self.menuBar.addAction(self.menuHelp.menuAction())
         self.mainToolBar.addAction(self.actionHome)
         self.mainToolBar.addSeparator()
 
         self.retranslateUi(self)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(self)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("MainWindow", "PDF Viewer"))
@@ -145,80 +151,78 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.actionAbout.setText(_translate("MainWindow", "About"))
         self.actionAbout_Qt.setText(_translate("MainWindow", "About Qt"))
 
-
     def saveSession(self):
-        settings =QtCore.QSettings("piepdf", "piepdf")
-        settings.beginGroup('mainWindow')
-        settings.setValue("splitter1Settings",self.splitter1.saveState())
-        settings.setValue("splitter2Settings",self.splitter2.saveState())
-        settings.setValue("geometry",self.saveGeometry())
-        settings.setValue("windowState",self.saveState())
+        settings = QtCore.QSettings("piepdf", "piepdf")
+        settings.beginGroup("mainWindow")
+        settings.setValue("splitter1Settings", self.splitter1.saveState())
+        settings.setValue("splitter2Settings", self.splitter2.saveState())
+        settings.setValue("geometry", self.saveGeometry())
+        settings.setValue("windowState", self.saveState())
         settings.endGroup()
-        #self.settings.sync()
+        # self.settings.sync()
 
     def restoreSession(self):
-        settings =QtCore.QSettings("piepdf", "piepdf")
-        settings.beginGroup('mainWindow')
-        try :
+        settings = QtCore.QSettings("piepdf", "piepdf")
+        settings.beginGroup("mainWindow")
+        try:
             self.splitter1.restoreState(settings.value("splitter1Settings"))
-        except :
+        except:
             print("Unable to set Qsplitter Setting !")
-        try :
+        try:
             self.splitter2.restoreState(settings.value("splitter2Settings"))
-        except :
+        except:
             print("Unable to set Qsplitter Setting !")
         try:
             self.restoreGeometry(settings.value("geometry"))
-        except :
+        except:
             print("Unable to set MainWindow Setting !")
         try:
             self.restoreState(settings.value("windowState"))
-        except :
+        except:
             print("Unable to set MainWindow Setting !")
         settings.endGroup()
-           
-        #settings = QtCore.QSettings("piepdf", "piepdf")
-        settings.beginGroup('Settings')
-        try : 
+
+        # settings = QtCore.QSettings("piepdf", "piepdf")
+        settings.beginGroup("Settings")
+        try:
             self.PiePdf_Path = settings.value("PiePdf_Path")
-        except :
+        except:
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
-        if self.PiePdf_Path is None :
+        if self.PiePdf_Path is None:
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
-        try :
+        try:
             self.usePdfViewer = int(settings.value("PdfViewerState")) is 2
-        except : 
-            self.usePdfViewer = True 
-        try :
-            self.WatchFolder = int(settings.value("WatchFolderState")) is 2 
-        except :
+        except:
+            self.usePdfViewer = True
+        try:
+            self.WatchFolder = int(settings.value("WatchFolderState")) is 2
+        except:
             self.WatchFolder = True
-        try :
-            self.emailaddress  = settings.value("EmailAddress") 
-        except : 
-            self.emailaddress =  ""
-        settings.beginGroup('Settings')
-    def restoreSetting(self) :
+        try:
+            self.emailaddress = settings.value("EmailAddress")
+        except:
+            self.emailaddress = ""
+        settings.beginGroup("Settings")
+
+    def restoreSetting(self):
         settings = QtCore.QSettings("piepdf", "piepdf")
-        settings.beginGroup('Settings')
-        try : 
-            self.PiePdf_Path = settings.value("PiePdf_Path")      
-        except :
+        settings.beginGroup("Settings")
+        try:
+            self.PiePdf_Path = settings.value("PiePdf_Path")
+        except:
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
-        if self.PiePdf_Path is None or " " :
+        if self.PiePdf_Path is None or " ":
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
-        try :
+        try:
             self.usePdfViewer = int(settings.value("PdfViewerState")) is 2
-        except : 
-            self.usePdfViewer = True 
-        try :
-            self.WatchFolder = int(settings.value("WatchFolderState")) is 2 
-        except :
+        except:
+            self.usePdfViewer = True
+        try:
+            self.WatchFolder = int(settings.value("WatchFolderState")) is 2
+        except:
             self.WatchFolder = True
-        try :
-            self.emailaddress  = settings.value("EmailAddress") 
-        except : 
-            self.emailaddress =  ""
-        settings.beginGroup('Settings')
-
-
+        try:
+            self.emailaddress = settings.value("EmailAddress")
+        except:
+            self.emailaddress = ""
+        settings.beginGroup("Settings")

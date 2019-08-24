@@ -76,14 +76,6 @@ class Adjust_UI(object):
         self.addSearchBox()
         self.addSettings()
         self.decorateMain()
-        """
-        if self.piepdf_path is "" or None or "None" :
-            self.openSettingWindow() 
-            self.parent_ui.restoreSetting()
-            self.piepdf_path  = self.parent_ui.PiePdf_Path 
-
-            self.settings_ui.closed.connect(self.decorateMain)
-         """
 
     def decorateMain(self):
         self.threadpool = QtCore.QThreadPool()
@@ -172,7 +164,7 @@ class Adjust_UI(object):
         for i in range(len(info)):
             items = []
             for j in range(self.ncols):
-                item_title = QtGui.QStandardItem(info[i][j])
+                item_title = QtGui.QStandardItem("{}".format( info[i][j]) )
                 items.append(item_title)
             self.model_3.appendRow(items)
         self.parent_ui.listView.verticalHeader().hide()

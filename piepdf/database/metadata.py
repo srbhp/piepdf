@@ -96,16 +96,40 @@ class GetPdfInfo(object):
             crdata = self.crossrefApi.works(ids=doiNo, format="bibentry")
             print(crdata)
             tm1 = crdata["message"]
-            self.metadata["title"] = tm1["title"][0]
-            self.metadata["doi"] = tm1["DOI"]
-            self.metadata["volumn"] = tm1["volume"]
-            self.metadata["author"] = " and ".join(
-                [i["given"] + " " + i["family"] for i in tm1["author"]]
-            )
-            self.metadata["journal"] = tm1["publisher"]
-            self.metadata["url"] = "https://dx.doi.org/" + tm1["DOI"]
-            self.metadata["year"] = tm1["created"]["date-parts"][0][0]
-            self.metadata["page"] = tm1["page"]
+            try :
+                self.metadata["title"] = tm1["title"][0]
+            except:
+                pass
+            try:
+                self.metadata["doi"] = tm1["DOI"]
+            except:
+                pass
+            try:
+                self.metadata["volumn"] = tm1["volume"]
+            except:
+                pass
+            try:
+                self.metadata["author"] = " and ".join(
+                    [i["given"] + " " + i["family"] for i in tm1["author"]]
+                    )
+            except:
+                pass
+            try:                
+                self.metadata["journal"] = tm1["publisher"]
+            except:
+                pass
+            try:
+                self.metadata["url"] = "https://dx.doi.org/" + tm1["DOI"]
+            except:
+                pass
+            try:
+                self.metadata["year"] = tm1["created"]["date-parts"][0][0]
+            except:
+                pass
+            try:              
+                self.metadata["page"] = tm1["page"]
+            except:
+                pass
         except:
             print("Failed ...... getMetadataDoi")
             pass
@@ -118,16 +142,40 @@ class GetPdfInfo(object):
         try:
             tm1 = qrresult["message"]
             tm1 = tm1["items"][0]
-            self.metadata["title"] = tm1["title"][0]
-            self.metadata["doi"] = tm1["DOI"]
-            self.metadata["volumn"] = tm1["volume"]
-            self.metadata["author"] = " and ".join(
-                [i["given"] + " " + i["family"] for i in tm1["author"]]
-            )
-            self.metadata["journal"] = tm1["publisher"]
-            self.metadata["url"] = "https://dx.doi.org/" + tm1["DOI"]
-            self.metadata["page"] = tm1["page"]
-            self.metadata["year"] = tm1["published-online"]["date-parts"][0][0]
+            try:
+                self.metadata["title"] = tm1["title"][0]
+            except:
+                pass
+            try:                              
+                self.metadata["doi"] = tm1["DOI"]
+            except:
+                pass
+            try:                              
+                self.metadata["volumn"] = tm1["volume"]
+            except:
+                pass
+            try:                              
+                self.metadata["author"] = " and ".join(
+                    [i["given"] + " " + i["family"] for i in tm1["author"]]
+                    )
+            except:
+                pass
+            try:                              
+                self.metadata["journal"] = tm1["publisher"]
+            except:
+                pass
+            try:                              
+                self.metadata["url"] = "https://dx.doi.org/" + tm1["DOI"]
+            except:
+                pass
+            try:                              
+                self.metadata["page"] = tm1["page"]
+            except:
+                pass
+            try:                              
+                self.metadata["year"] = tm1["published-online"]["date-parts"][0][0]
+            except:
+                pass
         except:
             print("Failed ")
             pass

@@ -1,36 +1,39 @@
-import popplerqt5
-from PyQt5 import QtCore, QtGui, QtWidgets
-import os
+"""
+This file implements metadata extraction function
+"""
+
+import logging
 import re
-import feedparser
-from habanero import Crossref
 import time
 
-import requests
-import logging
-import httplib2 as http_client
+import feedparser
+import popplerqt5
+from habanero import Crossref
+from PyQt5 import QtCore
 
+# import httplib2 as http_client
 # http_client.HTTPConnection.debuglevel = 1
+
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 requests_log = logging.getLogger("requests.packages.urllib3")
 requests_log.setLevel(logging.DEBUG)
 requests_log.propagate = True
 
-import requests
-import logging
-
 logging.getLogger().setLevel(logging.DEBUG)
 requests_log = logging.getLogger("requests.packages.urllib3")
 requests_log.setLevel(logging.DEBUG)
 requests_log.propagate = True
 
 
-class GetPdfInfo(object):
-    def __init__(self, ifparent=None, email=""):
+class GetPdfInfo:
+    """
+    Extract metadata
+    """
+
+    def __init__(self, email=""):
         self.mailto = email
         self.arXivApi = "http://export.arxiv.org/api/query?id_list="
-
         self.crossrefApi = Crossref(mailto=self.mailto)
         self.regString = r"\b(10\.[0-9]{4,}(?:\.[0-9]+)*\/(?:(?![\"&\'])\S)+)\b"
         self.metadata = {
@@ -45,6 +48,9 @@ class GetPdfInfo(object):
         self.page0_text = ""
 
     def getMetadata(self, filename):
+        """
+        Get Metadata
+        """
         time.sleep(1)
         doiNo = self.getDoiFromPdf(filename)
         # check if it a arxiv article
@@ -52,7 +58,6 @@ class GetPdfInfo(object):
         if len(doiNo) < 8:
             arxivNo = self.parseArxiv(self.page0_text)
             # IF arxiv no found check the second page
-
         # If doi No found
         if len(doiNo) > 8 and len(arxivNo) < 8:
             print(doiNo)
@@ -66,13 +71,13 @@ class GetPdfInfo(object):
 
     def getDoiFromPdf(self, filename):
         doc = popplerqt5.Poppler.Document.load(filename)
+        doi = ""
         if doc is not None:
             doc.setRenderHint(popplerqt5.Poppler.Document.Antialiasing)
             doc.setRenderHint(popplerqt5.Poppler.Document.TextAntialiasing)
             doc.setRenderHint(popplerqt5.Poppler.Document.ThinLineShape)
             doc.setRenderHint(popplerqt5.Poppler.Document.TextHinting)
             numpages = doc.numPages()
-
             rect = doc.page(0).pageSize()
             min = 0
             layout = doc.page(0).RawOrderLayout
@@ -96,7 +101,7 @@ class GetPdfInfo(object):
             crdata = self.crossrefApi.works(ids=doiNo, format="bibentry")
             print(crdata)
             tm1 = crdata["message"]
-            try :
+            try:
                 self.metadata["title"] = tm1["title"][0]
             except:
                 pass
@@ -111,10 +116,10 @@ class GetPdfInfo(object):
             try:
                 self.metadata["author"] = " and ".join(
                     [i["given"] + " " + i["family"] for i in tm1["author"]]
-                    )
+                )
             except:
                 pass
-            try:                
+            try:
                 self.metadata["journal"] = tm1["publisher"]
             except:
                 pass
@@ -126,7 +131,7 @@ class GetPdfInfo(object):
                 self.metadata["year"] = tm1["created"]["date-parts"][0][0]
             except:
                 pass
-            try:              
+            try:
                 self.metadata["page"] = tm1["page"]
             except:
                 pass
@@ -136,43 +141,43 @@ class GetPdfInfo(object):
 
     def getMetadataByQuery(self, qr):
         print(qr)
-        qrresult = self.crossrefApi.works(
-            query=qr, limit=1, sort="relevance", format="bibentry"
-        )
         try:
+            qrresult = self.crossrefApi.works(
+                query=qr, limit=1, sort="relevance", format="bibentry"
+            )
             tm1 = qrresult["message"]
             tm1 = tm1["items"][0]
             try:
                 self.metadata["title"] = tm1["title"][0]
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["doi"] = tm1["DOI"]
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["volumn"] = tm1["volume"]
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["author"] = " and ".join(
                     [i["given"] + " " + i["family"] for i in tm1["author"]]
-                    )
+                )
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["journal"] = tm1["publisher"]
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["url"] = "https://dx.doi.org/" + tm1["DOI"]
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["page"] = tm1["page"]
             except:
                 pass
-            try:                              
+            try:
                 self.metadata["year"] = tm1["published-online"]["date-parts"][0][0]
             except:
                 pass
@@ -193,8 +198,8 @@ class GetPdfInfo(object):
             tm1 = tm1.split()
             arNo = tm1[0][6:-2]
             results = feedparser.parse(self.arXivApi + arNo)
-            result = results["entries"][0]
             try:
+                result = results["entries"][0]
                 self.metadata["title"] = result["title"].replace("\n", " ")
                 self.metadata["author"] = " and ".join(
                     [i["name"] for i in result["authors"]]

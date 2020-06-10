@@ -39,5 +39,8 @@ By default it will create a folder `PiePdf`
 
 ## TODO 
 
-[] Add metadata providers 
-[] Fix Pdf reader performance 
+- [ ] Add support for custom metadata providers 
+- [ ] Fix Pdf reader performance 
+- [ ] Fix info widget(title, tags, open url)
+- [ ] Fix tab title 
+- [ ] Add icon to reload/sync folder

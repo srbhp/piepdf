@@ -39,6 +39,31 @@ class GrowingTextEdit(QtWidgets.QTextEdit):
         if self.heightMin <= docHeight <= self.heightMax:
             self.setMinimumHeight(docHeight)
 
+class ClickableQLabel(QtWidgets.QLabel):
+    clicked = QtCore.pyqtSignal(object)
+    def __init__(self, text = "", parent=None):
+        QtWidgets.QLabel.__init__(self,text, parent)
+    def mousePressEvent(self, ev):
+        self.clicked.emit(ev)
+
+class tagBottom(QtWidgets.QWidget):
+    def __init__(self, text):
+        super(QtWidgets.QWidget, self).__init__()
+        self.layout  = QtWidgets.QHBoxLayout(self)
+        self.b1 = QtWidgets.QPushButton(text)
+        self.b2 = ClickableQLabel()
+        self.layout.addWidget(self.b1)
+        self.layout.addWidget(self.b2)
+        pix = QtGui.QIcon.fromTheme("window-close")
+        self.b2.setPixmap(pix.pixmap(QtCore.QSize(16, 16)))
+        self.layout.setSpacing(0)
+        self.setStyleSheet(
+            "QPushButton {background-color : white; border: 5px solid white; border-top-left-radius: 10px; border-bottom-left-radius: 10px;}  QLabel {background-color : white;border: 5px solid white; border-top-right-radius: 10px; border-bottom-right-radius: 10px;}"
+        )
+        self.layout.addStretch(1)
+ 
+
+
 
 class InfoWindow(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
@@ -128,7 +153,7 @@ class InfoWindow(QtWidgets.QWidget):
         item_path.setTextAlignment(QtCore.Qt.AlignLeft)
         item_path.setFont(newfont2)
         self.info_model.appendRow([item_name, item_path])
-
+        # Tags 
         item_name = QtGui.QStandardItem("Tags")
         item_name.setTextAlignment(QtCore.Qt.AlignRight)
         item_name.setFont(newfont2)
@@ -146,9 +171,7 @@ class InfoWindow(QtWidgets.QWidget):
         item_path.setFont(newfont2)
         item_path.setToolTip("Add note to the pdf ..")
         self.info_model.appendRow([item_name, item_path])
-
         self.table.resizeRowsToContents()
-
         self.table.horizontalHeader().hide()
         self.table.verticalHeader().hide()
         self.table.setModel(self.info_model)
@@ -164,11 +187,17 @@ class InfoWindow(QtWidgets.QWidget):
         self.table.setFrameStyle(QtWidgets.QFrame.NoFrame)
         self.layout.addWidget(self.title, 0, 0)
         self.layout.addWidget(self.table, 1, 0)
+        # Tags
+        ic = 0 
+        for tags in  self.metadata["Tags"].split(";")[:-1]:
+            ic =ic + 1
+            self.layout.addWidget(tagBottom(str(tags)),2+ic, 0   )
+        print("Total ic ", ic)
+        #self.layout.addWidget(QtWidgets.QLineEdit("line edit"), 2, 0 )
         self.layout.setRowStretch(1, 1)
         # self.layout.setRowStretch(1, 10)
         self.layout.setVerticalSpacing(0)
         self.table.doubleClicked.connect(self.openUrl)
-
         self.setLayout(self.layout)
 
     def dataChangeSignal(self):

@@ -5,7 +5,9 @@ Manage Research Articles  and fetch metadata from the internet (currently crossr
 Trying to  make an opensource alternative to Mendeley, Zotero.
 
 <!-- ![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/Screenshot.webm) -->
-![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/Screencast.mp4)
+#### Demonstration pic
+https://github.com/srbhp/PiePdf/raw/master/Screencast.mp4
+
 ## Dependencies 
 python3-poppler-qt5, PyQt5 for python3, python3-feedparser, habanero
 

@@ -4,11 +4,9 @@ Manage Research Articles  and fetch metadata from the internet (currently crossr
 
 Trying to  make an opensource alternative to Mendeley, Zotero.
 
-<!-- ![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/Screenshot.webm) -->
-#### Demonstration pic
+## demo
 
-https://user-images.githubusercontent.com/1505628/194858721-6aa4e306-534b-4a47-b200-10634c5a2cc3.mp4
-
+![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/demo.gif) 
 
 
 ## Dependencies 

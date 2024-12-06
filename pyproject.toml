@@ -13,4 +13,6 @@ dependencies = [
     "pyqtwebengine>=5.15.7",
     "python-poppler-qt5>=21.3.0",
     "sip>=6.9.0",
+    "feedparser>=6.0.11",
+    "httplib2>=0.22.0",
 ]

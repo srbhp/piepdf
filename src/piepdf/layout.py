@@ -63,7 +63,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         # self.listView.setEnabled(False)
         self.splitter1 = QtWidgets.QSplitter(QtCore.Qt.Vertical)
         self.splitter1.addWidget(self.treeView)
-        self.splitter1.addWidget(self.treeView_2)
+        # self.splitter1.addWidget(self.treeView_2)
         self.splitter2 = QtWidgets.QSplitter(QtCore.Qt.Horizontal)
         self.splitter2.addWidget(self.splitter1)
         self.splitter2.addWidget(self.listView)

@@ -164,7 +164,7 @@ class Adjust_UI(object):
         for i in range(len(info)):
             items = []
             for j in range(self.ncols):
-                item_title = QtGui.QStandardItem("{}".format( info[i][j]) )
+                item_title = QtGui.QStandardItem("{}".format(info[i][j]))
                 items.append(item_title)
             self.model_3.appendRow(items)
         self.parent_ui.listView.verticalHeader().hide()
@@ -176,8 +176,12 @@ class Adjust_UI(object):
         self.parent_ui.listView.hideColumn(7)
         self.parent_ui.listView.hideColumn(8)
         self.parent_ui.listView.hideColumn(9)
-        self.parent_ui.listView.setColumnWidth(1, self.parent_ui.listView.width() * 0.6)
-        self.parent_ui.listView.setColumnWidth(3, self.parent_ui.listView.width() * 0.1)
+        self.parent_ui.listView.setColumnWidth(
+            1, int(self.parent_ui.listView.width() * 0.6)
+        )
+        self.parent_ui.listView.setColumnWidth(
+            3, int(self.parent_ui.listView.width() * 0.1)
+        )
 
     def addSearchBox(self):
         self.searchWidget = QtWidgets.QWidget()

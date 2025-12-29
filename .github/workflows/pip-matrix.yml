@@ -15,7 +15,9 @@ jobs:
       repository-projects: write
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      # Set fail-fast to false to ensure that feedback is delivered
+      # for all matrix combinations. Consider changing this to true
+      # when your workflow is stable.
       fail-fast: false
 
       matrix:
@@ -23,9 +25,8 @@ jobs:
         build_type: [Release]
 
     steps:
-    - uses: actions/checkout@v5
-    - uses: actions/setup-python@v6
+    - uses: actions/checkout
+    - uses: actions/setup-python
       with:
         python-version: '3.13' 
     - run: pip install habanero PyQt5 python-poppler-qt5 feedparser         
-

@@ -25,7 +25,7 @@ jobs:
         build_type: [Release]
 
     steps:
-    - uses: actions/checkout
+    - uses: actions/checkout@v6
     - run: |
         date > generated.txt
         git config user.name "github-actions[bot]"

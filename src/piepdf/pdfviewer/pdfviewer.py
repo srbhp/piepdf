@@ -1,9 +1,9 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-import popplerqt5
-import time
 import sys
-from pdfviewer.fixedARLabel import ThumbWidget
+
 import pdfviewer.threadedRender as threaded
+import popplerqt5
+from pdfviewer.fixedARLabel import ThumbWidget
+from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -24,14 +24,22 @@ class Ui_MainWindow(object):
         # QtWidgets.QScrollArea(cwidget)
         self.current_width = float(MainWindow.width())
         dpi = MainWindow.physicalDpiX()  # //*central.height()/sizeObject.height()
-        self.doc = popplerqt5.Poppler.Document.load(self.filename)
-        # doc.setRenderBackend(popplerqt5.Poppler.Document.ArthurBackend)
-        self.doc.setRenderHint(popplerqt5.Poppler.Document.Antialiasing)
-        self.doc.setRenderHint(popplerqt5.Poppler.Document.TextAntialiasing)
-        self.doc.setRenderHint(popplerqt5.Poppler.Document.ThinLineShape)
-        self.doc.setRenderHint(popplerqt5.Poppler.Document.TextHinting)
-        numpages = self.doc.numPages()
-        print(numpages)
+        try:
+            self.doc = popplerqt5.Poppler.Document.load(self.filename)
+            if self.doc is None:
+                raise RuntimeError(f"Failed to load PDF: {self.filename}")
+            # doc.setRenderBackend(popplerqt5.Poppler.Document.ArthurBackend)
+            self.doc.setRenderHint(popplerqt5.Poppler.Document.Antialiasing)
+            self.doc.setRenderHint(popplerqt5.Poppler.Document.TextAntialiasing)
+            self.doc.setRenderHint(popplerqt5.Poppler.Document.ThinLineShape)
+            self.doc.setRenderHint(popplerqt5.Poppler.Document.TextHinting)
+            numpages = self.doc.numPages()
+            if numpages <= 0:
+                raise RuntimeError(f"PDF has no pages: {self.filename}")
+            print(numpages)
+        except Exception as e:
+            print(f"Error loading PDF: {e}")
+            sys.exit(1)
         self.fullLayout = QtWidgets.QHBoxLayout()
         self.fullLayout.setContentsMargins(0, 0, 0, 0)
         self.centralwidget.setLayout(self.fullLayout)

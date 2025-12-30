@@ -1,14 +1,29 @@
 #!/usr/bin/env python3
-""" Tags for the paper """
+"""Tags for the paper"""
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
-                             QDialogButtonBox, QFormLayout, QGridLayout,
-                             QGroupBox, QHBoxLayout, QLabel, QLineEdit, QMenu,
-                             QMenuBar, QPushButton, QSpinBox, QTextEdit,
-                             QVBoxLayout, QWidget, QSizePolicy)
+from PyQt5.QtWidgets import (
+    QApplication,
+    QComboBox,
+    QDialog,
+    QDialogButtonBox,
+    QFormLayout,
+    QGridLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QMenu,
+    QMenuBar,
+    QPushButton,
+    QSpinBox,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
+    QSizePolicy,
+)
 
 from PyQt5.QtGui import QIcon
 import sys
@@ -64,7 +79,7 @@ class Dialog(QDialog):
         self.setWindowTitle("Form Layout - pythonspot.com")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     dialog = Dialog()
     sys.exit(dialog.exec_())

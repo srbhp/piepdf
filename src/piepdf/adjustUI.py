@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
-from pdfviewer import pdfviewer
-import infoWidget, settings
-from PyQt5 import QtCore, QtGui, QtWidgets
-import database.sql as sqldb
-import time
 import os
+
+import database.sql as sqldb
+import settings
+from pdfviewer import pdfviewer
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class ClickableQLabel(QtWidgets.QLabel):

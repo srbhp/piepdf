@@ -51,49 +51,86 @@ class GetPdfInfo:
         """
         Get Metadata
         """
-        time.sleep(1)
-        doiNo = self.getDoiFromPdf(filename)
-        # check if it a arxiv article
-        arxivNo = ""
-        if len(doiNo) < 8:
-            arxivNo = self.parseArxiv(self.page0_text)
-            # IF arxiv no found check the second page
-        # If doi No found
-        if len(doiNo) > 8 and len(arxivNo) < 8:
-            print(doiNo)
-            self.getMetadataByDoi(doiNo)
-        # If both arxiv and doi not found get metadata by text queryself.
-        # 1/3 of of first page is send for text query.
-        if len(doiNo) + len(arxivNo) < 8:
-            qrtext = self.page0_text[0:200]
-            self.getMetadataByQuery(qrtext)
-        return self.metadata
+        try:
+            time.sleep(1)
+            doiNo = self.getDoiFromPdf(filename)
+            # check if it a arxiv article
+            arxivNo = ""
+            if len(doiNo) < 8:
+                try:
+                    arxivNo = self.parseArxiv(self.page0_text)
+                except:
+                    arxivNo = ""
+            # If doi No found
+            if len(doiNo) > 8 and len(arxivNo) < 8:
+                print(doiNo)
+                try:
+                    self.getMetadataByDoi(doiNo)
+                except Exception as e:
+                    print(f"Error getting metadata by DOI: {e}")
+            # If both arxiv and doi not found get metadata by text queryself.
+            # 1/3 of of first page is send for text query.
+            if len(doiNo) + len(arxivNo) < 8:
+                try:
+                    qrtext = self.page0_text[0:200] if self.page0_text else ""
+                    if qrtext:
+                        self.getMetadataByQuery(qrtext)
+                except Exception as e:
+                    print(f"Error getting metadata by query: {e}")
+            return self.metadata
+        except Exception as e:
+            print(f"Error in getMetadata: {e}")
+            return self.metadata
 
     def getDoiFromPdf(self, filename):
-        doc = popplerqt5.Poppler.Document.load(filename)
-        doi = ""
-        if doc is not None:
-            doc.setRenderHint(popplerqt5.Poppler.Document.Antialiasing)
-            doc.setRenderHint(popplerqt5.Poppler.Document.TextAntialiasing)
-            doc.setRenderHint(popplerqt5.Poppler.Document.ThinLineShape)
-            doc.setRenderHint(popplerqt5.Poppler.Document.TextHinting)
-            numpages = doc.numPages()
-            rect = doc.page(0).pageSize()
-            min = 0
-            layout = doc.page(0).RawOrderLayout
-            # layout=doc.page(0).PhysicalLayout
-            self.page0_text = doc.page(0).text(
-                QtCore.QRectF(min, min, rect.width(), rect.height())
-            )  # .to_utf8()
-            doi = re.findall(self.regString, self.page0_text)
-            # First page maye be not the Main page e.g.,IOP
-            if numpages >= 2 and len(doi) < 4:
-                page1_text = doc.page(1).text(
-                    QtCore.QRectF(min, min, rect.width(), rect.height())
-                )
-                doi = re.findall(self.regString, page1_text)
-            print("Doi:", doi)
-        return doi
+        try:
+            doc = popplerqt5.Poppler.Document.load(filename)
+            doi = ""
+            if doc is not None:
+                try:
+                    doc.setRenderHint(popplerqt5.Poppler.Document.Antialiasing)
+                    doc.setRenderHint(popplerqt5.Poppler.Document.TextAntialiasing)
+                    doc.setRenderHint(popplerqt5.Poppler.Document.ThinLineShape)
+                    doc.setRenderHint(popplerqt5.Poppler.Document.TextHinting)
+                except:
+                    pass
+
+                try:
+                    numpages = doc.numPages()
+                    if numpages <= 0:
+                        return ""
+
+                    page0 = doc.page(0)
+                    if page0 is None:
+                        return ""
+
+                    rect = page0.pageSize()
+                    min = 0
+                    try:
+                        layout = page0.RawOrderLayout
+                    except:
+                        pass
+
+                    self.page0_text = page0.text(
+                        QtCore.QRectF(min, min, rect.width(), rect.height())
+                    )
+                    doi = re.findall(self.regString, self.page0_text)
+
+                    # First page maye be not the Main page e.g.,IOP
+                    if numpages >= 2 and len(doi) < 4:
+                        page1 = doc.page(1)
+                        if page1 is not None:
+                            page1_text = page1.text(
+                                QtCore.QRectF(min, min, rect.width(), rect.height())
+                            )
+                            doi = re.findall(self.regString, page1_text)
+                    print("Doi:", doi)
+                except Exception as e:
+                    print(f"Error extracting text from PDF: {e}")
+            return doi
+        except Exception as e:
+            print(f"Error loading PDF {filename}: {e}")
+            return ""
         # check if it a arxiv article
 
     def getMetadataByDoi(self, doiNo):

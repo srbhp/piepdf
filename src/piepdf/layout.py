@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from PyQt5 import QtCore, QtGui, QtWidgets
-import infoWidget
 import os
+
+import infoWidget
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
@@ -191,11 +192,11 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         if self.PiePdf_Path is None:
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
         try:
-            self.usePdfViewer = int(settings.value("PdfViewerState")) is 2
+            self.usePdfViewer = int(settings.value("PdfViewerState")) == 2
         except:
             self.usePdfViewer = True
         try:
-            self.WatchFolder = int(settings.value("WatchFolderState")) is 2
+            self.WatchFolder = int(settings.value("WatchFolderState")) == 2
         except:
             self.WatchFolder = True
         try:
@@ -214,11 +215,11 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         if self.PiePdf_Path is None or " ":
             self.PiePdf_Path = os.path.expanduser("~/PiePdf")
         try:
-            self.usePdfViewer = int(settings.value("PdfViewerState")) is 2
+            self.usePdfViewer = int(settings.value("PdfViewerState")) == 2
         except:
             self.usePdfViewer = True
         try:
-            self.WatchFolder = int(settings.value("WatchFolderState")) is 2
+            self.WatchFolder = int(settings.value("WatchFolderState")) == 2
         except:
             self.WatchFolder = True
         try:

@@ -33,4 +33,7 @@ jobs:
         git add .
         git commit -m "gitbot on `date`"
     - uses: actions/setup-python@v6
-    - run: pip install habanero PyQt5 python-poppler-qt5 feedparser         
+    - run: |
+          sudo apt update 
+          sudo apt install --yes python-poppler-qt5
+          pip install habanero PyQt5 feedparser         

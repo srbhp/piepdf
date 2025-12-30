@@ -6,7 +6,8 @@ Trying to  make an opensource alternative to Mendeley, Zotero.
 
 ## demo
 
-![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/demo.gif) 
+![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/assets/demo.gif) 
+![demonstration pic](https://github.com/srbhp/PiePdf/raw/master/assets/screenshot.png) 
 
 
 ## Dependencies 

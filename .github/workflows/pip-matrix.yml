@@ -5,6 +5,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * *'  # Once per day
 
 jobs:
   build:
@@ -15,13 +17,11 @@ jobs:
       repository-projects: write
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered
-      # for all matrix combinations. Consider changing this to true
-      # when your workflow is stable.
       fail-fast: false
 
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest ]
+        #os: [ubuntu-latest, windows-latest, macos-latest ]
+        os: [ubuntu-latest]
         build_type: [Release]
 
     steps:

@@ -1,4 +1,4 @@
-from pdfviewer.fixedARLabel import ImageWidget
+from piepdf.pdfviewer.fixedARLabel import ImageWidget
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 

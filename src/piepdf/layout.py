@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-import infoWidget
+from piepdf import infoWidget
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 

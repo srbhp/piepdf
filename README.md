@@ -26,6 +26,21 @@ zypper in python3-poppler-qt5 python3-feedparser python3-qt5 python3-httplib2
 ```
 
 ## Installation 
+
+How you can install and test locally:
+
+```bash
+```
+
+From the project root run: `pip install -e .`
+Then run: 
+```bash
+piepdf
+```
+(or `python -m piepdf` )
+
+
+
 ```
 git clone https://github.com/srbhp/PiePdf.git
 cd PiePdf

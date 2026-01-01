@@ -5,8 +5,8 @@ import sys
 
 from PyQt5 import QtCore, QtWidgets
 
-from . import adjustUI
-from . import layout as wlayout
+from piepdf import adjustUI
+from piepdf import layout as wlayout
 
 
 def main(argv=None):

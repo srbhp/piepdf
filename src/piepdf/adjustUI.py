@@ -3,9 +3,9 @@
 
 import os
 
-import database.sql as sqldb
-import settings
-from pdfviewer import pdfviewer
+import piepdf.database.sql as sqldb
+from piepdf import settings
+from piepdf.pdfviewer import pdfviewer
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 

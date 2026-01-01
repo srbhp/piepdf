@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-# from PyQt5 import QtWebKitWidgets
-# from PyQt5 import QtWebEngineWidgets
 import os
 import sqlite3
 

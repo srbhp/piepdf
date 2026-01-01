@@ -1,8 +1,8 @@
 import sys
 
-import pdfviewer.threadedRender as threaded
+import piepdf.pdfviewer.threadedRender as threaded
 import popplerqt5
-from pdfviewer.fixedARLabel import ThumbWidget
+from piepdf.pdfviewer.fixedARLabel import ThumbWidget
 from PyQt5 import QtCore, QtWidgets
 
 

@@ -2,7 +2,7 @@ import os
 import sqlite3
 import time
 
-from database import metadata
+from piepdf.database import metadata
 from PyQt5 import QtCore
 
 DATABASE_PATH = (

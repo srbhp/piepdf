@@ -9,8 +9,18 @@ dependencies = [
     "pyqt5>=5.15.11",
     "pyqt5-sip>=12.16.0",
     "pyqtwebengine>=5.15.7",
-    # "python-poppler-qt5>=21.3.0",
+    "python-poppler-qt5>=21.3.0",
     "sip>=6.9.0",
     "feedparser>=6.0.11",
     "httplib2>=0.22.0",
 ]
+
+[project.scripts]
+piepdf = "piepdf.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=61","wheel"]
+build-backend = "setuptools.build_meta"

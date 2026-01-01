@@ -8,9 +8,7 @@ class Ui_SettingWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(Ui_SettingWindow, self).__init__()
 
-    def setupUi(
-        self,
-    ):
+    def setupUi(self):
         self.setObjectName("SettingWindow")
         self.resize(568, 109)
         self.centralwidget = QtWidgets.QWidget()
@@ -94,8 +92,8 @@ class Ui_SettingWindow(QtWidgets.QMainWindow):
             self.pdfView.setCheckState(int(settings.value("PdfViewerState")))
             self.watchFolder.setCheckState(int(settings.value("WatchFolderState")))
             self.emailwidget.setText(settings.value("EmailAddress"))
-        except:
-            print("Failed (3) ")
+        except Exception as e:
+            print(f"Failed at reading setting {e}")
         print(settings.value("PiePdf_Path"))
         if settings.value("PiePdf_Path") is None:
             self.mainpdfPath.setText(os.path.expanduser("~/PiePdf"))
@@ -112,6 +110,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     w = QtWidgets.QMainWindow()
     ui = Ui_SettingWindow()
-    ui.setupUi(w)
+    ui.setupUi()
     w.show()
     sys.exit(app.exec_())

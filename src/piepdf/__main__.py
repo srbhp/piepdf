@@ -21,7 +21,7 @@ def main(argv=None):
     app = QtWidgets.QApplication(argv)
     Mainwindow = wlayout.Ui_MainWindow()
     Mainwindow.setupUi()
-    adfn = adjustUI.Adjust_UI(Mainwindow)
+    _ = adjustUI.Adjust_UI(Mainwindow)
     Mainwindow.show()
     app.aboutToQuit.connect(Mainwindow.saveSession)
     sys.exit(app.exec_())

@@ -37,6 +37,9 @@ jobs:
     - uses: actions/setup-python@v6
     - run: |
           sudo apt update 
-          sudo apt install --yes python3-poppler-qt5
-          pip install habanero PyQt5 feedparser
+          # sudo apt install --yes python3-poppler-qt5
+          pip install --upgrade pip
+          pip install --upgrade sip
+          pip install git+https://github.com/ frescobaldi/python-poppler-qt5.git
+          pip install habanero PyQt5 feedparser python3-poppler-qt5 
           pip install -e .

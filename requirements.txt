@@ -1,6 +1,0 @@
-habanero
-PyQt5 
-python-poppler-qt5 
-feedparser
-httplib2
-

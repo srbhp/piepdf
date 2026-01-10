@@ -30,22 +30,18 @@ zypper in python3-poppler-qt5 python3-feedparser python3-qt5 python3-httplib2
 How you can install and test locally:
 
 ```bash
+pip install piepdf
 ```
 
+OR 
+
 From the project root run: `pip install -e .`
+
 Then run: 
 ```bash
 piepdf
 ```
-(or `python -m piepdf` )
 
-
-
-```
-git clone https://github.com/srbhp/PiePdf.git
-cd PiePdf
-python3 src/piepdf
-```
 By default it create a folder `PiePdf`
  in your home directory. You can change this default directory to any `Path` from the setiing menu.
  You have keep all your pdfs in this directory. *PiePdf* fetch metadata automatically 

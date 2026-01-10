@@ -1,0 +1,75 @@
+name: Release
+
+# This workflow runs on any tag push
+on:
+  push:
+    tags:
+      - "*"
+
+# These permissions are necessary for trusted publishing to PyPI,
+# and creating a GitHub Release
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run type checking
+        run: uv run mypy .
+
+      - name: Run linting
+        run: uv run ruff check .
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev --python ${{ matrix.python-version }}
+
+      - name: Run tests
+        run: uv run pytest
+
+  build-and-publish:
+    # This job only runs if the lint and test jobs pass
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Build package
+        run: uv build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

@@ -37,14 +37,14 @@ jobs:
         git pull
         git push
     - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "latest"
-          enable-cache: true
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+        enable-cache: true
     - name: Build package
-        run: |
-          uv sync 
-          uv build
+      run: |
+        uv sync 
+        uv build
 
     # - uses: actions/setup-python@v6
     # - run: |

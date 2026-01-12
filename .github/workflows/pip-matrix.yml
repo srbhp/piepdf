@@ -43,6 +43,8 @@ jobs:
         enable-cache: true
     - name: Build package
       run: |
+        sudo apt update 
+        sudo apt install --yes python3-poppler-qt5
         uv sync --dev 
         uv build
 

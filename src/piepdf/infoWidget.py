@@ -1,29 +1,25 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 import os
 import sqlite3
 
-piepdf_PATH = (
-    QtCore.QStandardPaths.standardLocations(QtCore.QStandardPaths.ConfigLocation)[0]
-    + "/piepdf"
+std_config = QtCore.QStandardPaths.writableLocation(
+    QtCore.QStandardPaths.StandardLocation.ConfigLocation
 )
-CONFIG_PATH = (
-    QtCore.QStandardPaths.standardLocations(QtCore.QStandardPaths.ConfigLocation)[0]
-    + "/piepdf/piepdf.conf"
-)
-DATABASE_PATH = (
-    QtCore.QStandardPaths.standardLocations(QtCore.QStandardPaths.ConfigLocation)[0]
-    + "/piepdf/piepdf_database"
-)
+
+piepdf_PATH = std_config + "/piepdf"
+CONFIG_PATH = std_config + "/piepdf/piepdf.conf"
+DATABASE_PATH = std_config + "/piepdf/piepdf_database"
 
 
 class GrowingTextEdit(QtWidgets.QTextEdit):
     def __init__(self, *args, **kwargs):
         super(GrowingTextEdit, self).__init__(*args, **kwargs)
         self.document().contentsChanged.connect(self.sizeChange)
-        self.setFrameStyle(QtWidgets.QFrame.NoFrame)
+        self.setFrameStyle(False)
         self.setSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
         )
         self.heightMin = 0
         self.heightMax = 65000

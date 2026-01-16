@@ -2,9 +2,9 @@
 """Tags for the paper"""
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QApplication,
     QComboBox,
     QDialog,
@@ -25,7 +25,7 @@ from PyQt5.QtWidgets import (
     QSizePolicy,
 )
 
-from PyQt5.QtGui import QIcon
+from PyQt6.QtGui import QIcon
 import sys
 
 import flowlayout

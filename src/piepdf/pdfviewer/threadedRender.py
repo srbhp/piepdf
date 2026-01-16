@@ -1,5 +1,5 @@
 from piepdf.pdfviewer.fixedARLabel import ImageWidget
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class WorkerSignals(QtCore.QObject):
@@ -39,7 +39,8 @@ class GetAllPage(QtCore.QRunnable):
                 self.label[i].setPixmap(pixmap)
                 if not self.keepAR:
                     self.label[i].setSizePolicy(
-                        QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding
+                        QtWidgets.QSizePolicy.Policy.Fixed,
+                        QtWidgets.QSizePolicy.Policy.Expanding,
                     )
                     self.label[i].setScaledContents(True)
 

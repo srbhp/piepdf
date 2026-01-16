@@ -3,7 +3,7 @@
 import os
 import sys
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 
 from piepdf import adjustUI
 from piepdf import layout as wlayout
@@ -15,8 +15,8 @@ def main(argv=None):
 
     # Set Qt attributes BEFORE creating QApplication
     os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1.5"
-    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
-    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+    # QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
+    # QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
     app = QtWidgets.QApplication(argv)
     Mainwindow = wlayout.Ui_MainWindow()
@@ -24,7 +24,7 @@ def main(argv=None):
     _ = adjustUI.Adjust_UI(Mainwindow)
     Mainwindow.show()
     app.aboutToQuit.connect(Mainwindow.saveSession)
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":

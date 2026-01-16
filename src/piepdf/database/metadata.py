@@ -9,7 +9,7 @@ import time
 import feedparser
 import popplerqt5
 from habanero import Crossref
-from PyQt5 import QtCore
+from PyQt6 import QtCore
 
 # import httplib2 as http_client
 # http_client.HTTPConnection.debuglevel = 1

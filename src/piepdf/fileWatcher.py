@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 
 
 def xor(lst1, lst2):

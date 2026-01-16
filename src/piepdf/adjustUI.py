@@ -6,7 +6,20 @@ import os
 import piepdf.database.sql as sqldb
 from piepdf import settings
 from piepdf.pdfviewer import pdfviewer
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
+
+
+class MyFileSystemModel(QtGui.QFileSystemModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Additional initialization code can go here
+        self.headerfirstcolumn = "Main Projects"
+
+    def headerData(self, section, orientation, role):
+        if section == 0 and role == QtCore.Qt.ItemDataRole.DisplayRole:
+            return self.headerfirstcolumn
+        else:
+            return QtGui.QFileSystemModel.headerData(self, section, orientation, role)
 
 
 class ClickableQLabel(QtWidgets.QLabel):
@@ -19,20 +32,6 @@ class ClickableQLabel(QtWidgets.QLabel):
         self.clicked.emit(ev)
 
 
-class MyFileSystemModel(QtWidgets.QFileSystemModel):
-    def __init__(self):
-        super().__init__()
-        self.headerfirstcolumn = "Main Projects"
-
-    def headerData(self, section, orientation, role):
-        if section == 0 and role == QtCore.Qt.DisplayRole:
-            return self.headerfirstcolumn
-        else:
-            return QtWidgets.QFileSystemModel.headerData(
-                self, section, orientation, role
-            )
-
-
 class Adjust_UI(object):
     def __init__(self, parent_ui):
         self.parent_ui = parent_ui
@@ -42,20 +41,20 @@ class Adjust_UI(object):
         print(self.piepdf_path)
 
         self.parent_ui.listView.verticalHeader().setSectionResizeMode(
-            QtWidgets.QHeaderView.ResizeToContents
+            QtWidgets.QHeaderView.ResizeMode.ResizeToContents
         )
         self.parent_ui.listView.horizontalHeader().setSectionResizeMode(
-            QtWidgets.QHeaderView.Interactive
+            QtWidgets.QHeaderView.ResizeMode.Interactive
         )
         self.parent_ui.listView.horizontalHeader().setStretchLastSection(True)
         self.parent_ui.listView.setSelectionBehavior(
-            QtWidgets.QAbstractItemView.SelectRows
+            QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows
         )
         self.parent_ui.tabWidget.tabBar().setTabButton(
-            0, QtWidgets.QTabBar.RightSide, None
+            0, QtWidgets.QTabBar.ButtonPosition.RightSide, None
         )
         self.parent_ui.tabWidget.tabBar().setTabButton(
-            0, QtWidgets.QTabBar.LeftSide, None
+            0, QtWidgets.QTabBar.ButtonPosition.LeftSide, None
         )
         self.model_3 = QtGui.QStandardItemModel()
 
@@ -89,7 +88,7 @@ class Adjust_UI(object):
         self.piepdf_db.signals.finished.connect(self.dbFinish)
 
     def addSettings(self):
-        self.actionSetting = QtWidgets.QAction()
+        self.actionSetting = QtGui.QAction("settings")
         icon = QtGui.QIcon.fromTheme("preferences-system")
         self.actionSetting.setIcon(icon)
         self.actionSetting.setObjectName("actionSettings")
@@ -188,7 +187,7 @@ class Adjust_UI(object):
         self.searchlayout = QtWidgets.QHBoxLayout(self.searchWidget)
         self.searchBox = QtWidgets.QLineEdit()
         self.searchIcon = ClickableQLabel()
-        self.searchBox.setFrame(QtWidgets.QFrame.NoFrame)
+        self.searchBox.setFrame(False)
         self.searchBox.setPlaceholderText("Search ")
         self.searchBox.setMaximumWidth(800)
         self.searchBox.setMinimumWidth(300)
@@ -209,10 +208,10 @@ class Adjust_UI(object):
         self.searchMenuList = []
         # Add 'All' first
 
-        self.searchMenuList.append(QtWidgets.QAction("All", checkable=True))
+        self.searchMenuList.append(QtGui.QAction("All", checkable=True))
         for i in self.searchColumns:
             if i != "All":
-                self.searchMenuList.append(QtWidgets.QAction(i, checkable=True))
+                self.searchMenuList.append(QtGui.QAction(i, checkable=True))
         for d in self.searchMenuList:
             d.setChecked(self.searchColumns[d.text()])
             self.searchMenu.addAction(d)
@@ -220,7 +219,8 @@ class Adjust_UI(object):
         self.searchIcon.clicked.connect(self.showsearchIcon)
         spacer = QtWidgets.QWidget()
         spacer.setSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
         )
         self.parent_ui.mainToolBar.addWidget(spacer)
         self.parent_ui.mainToolBar.addWidget(self.searchWidget)
@@ -273,12 +273,16 @@ class Adjust_UI(object):
 
     def updateWidgets(self):
         self.model = MyFileSystemModel()
-        self.model.setFilter(QtCore.QDir.NoDotAndDotDot | QtCore.QDir.Dirs)
+        self.model.setFilter(
+            QtCore.QDir.Filter.NoDotAndDotDot | QtCore.QDir.Filter.Dirs
+        )
         self.model.setRootPath(self.piepdf_path)
         self.model_2 = MyFileSystemModel()
         self.model_2.setRootPath(self.piepdf_path)
         self.model_2.headerfirstcolumn = "Sub Projects"
-        self.model_2.setFilter(QtCore.QDir.NoDotAndDotDot | QtCore.QDir.Dirs)
+        self.model_2.setFilter(
+            QtCore.QDir.Filter.NoDotAndDotDot | QtCore.QDir.Filter.Dirs
+        )
         self.parent_ui.treeView.setModel(self.model)
         self.parent_ui.treeView.setRootIndex(self.model.index(self.piepdf_path))
         self.parent_ui.treeView.setIndentation(20)
@@ -293,7 +297,7 @@ class Adjust_UI(object):
         self.parent_ui.treeView_2.hideColumn(3)
         self.parent_ui.listView.setWindowTitle("Example List")
         self.parent_ui.listView.setEditTriggers(
-            QtWidgets.QAbstractItemView.NoEditTriggers
+            QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers
         )
         self.update_listview(self.piepdf_path)
 

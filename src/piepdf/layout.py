@@ -2,7 +2,7 @@
 import os
 
 from piepdf import infoWidget
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
@@ -13,35 +13,36 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def setupUi(self):
         self.setObjectName("MainWindow")
-        sizeObject = QtWidgets.QDesktopWidget().screenGeometry(-1)
-        self.resize(int(sizeObject.height() * 0.8), int(sizeObject.width() * 0.5))
+        # sizeObject = QtGui.QDesktopWidget.screenGeometry()
+        # self.resize(int(sizeObject.height() * 0.8), int(sizeObject.width() * 0.5))
         self.setUnifiedTitleAndToolBarOnMac(True)
-        self.centralWidget = QtWidgets.QWidget(self)
-        self.centralWidget.setObjectName("centralWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.widget = QtWidgets.QWidget(self.centralWidget)
+        self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setObjectName("widget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.splitter = QtWidgets.QSplitter(self.widget)
-        self.splitter.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self.splitter.setObjectName("splitter")
         self.splitter.setStyleSheet("QSplitter::handle { image: none; }")
 
         self.tabWidget = QtWidgets.QTabWidget(self.splitter)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+            QtWidgets.QSizePolicy.Policy.Preferred,
+            QtWidgets.QSizePolicy.Policy.Expanding,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
-        self.tabWidget.setTabPosition(QtWidgets.QTabWidget.North)
+        self.tabWidget.setTabPosition(QtWidgets.QTabWidget.TabPosition.North)
 
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setTabBarAutoHide(True)
@@ -62,10 +63,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         # self.listView = QtWidgets.QListView()
         self.graphicsView = infoWidget.InfoWindow()
         # self.listView.setEnabled(False)
-        self.splitter1 = QtWidgets.QSplitter(QtCore.Qt.Vertical)
+        self.splitter1 = QtWidgets.QSplitter(QtCore.Qt.Orientation.Vertical)
         self.splitter1.addWidget(self.treeView)
         # self.splitter1.addWidget(self.treeView_2)
-        self.splitter2 = QtWidgets.QSplitter(QtCore.Qt.Horizontal)
+        self.splitter2 = QtWidgets.QSplitter(QtCore.Qt.Orientation.Horizontal)
         self.splitter2.addWidget(self.splitter1)
         self.splitter2.addWidget(self.listView)
         self.splitter2.addWidget(self.graphicsView)
@@ -82,15 +83,18 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.verticalLayout_3.addWidget(self.graphicsView,0,2,2,1)
         """
         self.tabWidget.addTab(self.bookmarkTab, "Main Window ")
-        self.tabWidget.tabBar().setTabButton(0, QtWidgets.QTabBar.RightSide, None)
+        self.tabWidget.tabBar().setTabButton(
+            0, QtWidgets.QTabBar.ButtonPosition.RightSide, None
+        )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
         )
         sizePolicy.setHorizontalStretch(10)
         sizePolicy.setVerticalStretch(0)
         self.verticalLayout_2.addWidget(self.splitter)
         self.verticalLayout.addWidget(self.widget)
-        self.setCentralWidget(self.centralWidget)
+        self.setCentralWidget(self.centralwidget)
         self.menuBar = QtWidgets.QMenuBar(self)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 700, 22))
         self.menuBar.setObjectName("menuBar")
@@ -105,19 +109,20 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.mainToolBar.setMovable(False)
         self.mainToolBar.setFloatable(False)
         self.mainToolBar.setObjectName("mainToolBar")
-        self.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
+        self.addToolBar(QtCore.Qt.ToolBarArea.TopToolBarArea, self.mainToolBar)
         self.statusBar = QtWidgets.QStatusBar(self)
         self.statusBar.setObjectName("statusBar")
         self.setStatusBar(self.statusBar)
-        self.actionHome = QtWidgets.QAction(self)
+
+        self.actionHome = QtGui.QAction("Home", self)
         icon = QtGui.QIcon.fromTheme("go-home")
         self.actionHome.setIcon(icon)
         self.actionHome.setObjectName("actionHome")
-        self.actionQuit = QtWidgets.QAction(self)
+        self.actionQuit = QtGui.QAction(self)
         self.actionQuit.setObjectName("actionQuit")
-        self.actionAbout = QtWidgets.QAction(self)
+        self.actionAbout = QtGui.QAction(self)
         self.actionAbout.setObjectName("actionAbout")
-        self.actionAbout_Qt = QtWidgets.QAction(self)
+        self.actionAbout_Qt = QtGui.QAction(self)
         self.actionAbout_Qt.setObjectName("actionAbout_Qt")
         self.search_list = QtCore.QStringListModel()
         self.search_list.setStringList(["some", "words", "in", "my", "dictionary"])

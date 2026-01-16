@@ -3,7 +3,7 @@
 import re
 
 import popplerqt5
-from PyQt5 import QtCore
+from PyQt6 import QtCore
 
 
 def getDoiFromPdf(filename):

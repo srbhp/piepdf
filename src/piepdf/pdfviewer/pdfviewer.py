@@ -3,7 +3,7 @@ import sys
 import piepdf.pdfviewer.threadedRender as threaded
 import popplerqt5
 from piepdf.pdfviewer.fixedARLabel import ThumbWidget
-from PyQt5 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtWidgets, QtGui
 
 
 class Ui_MainWindow(object):
@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         # self.pdfwidget.setLayout( s)
         # QtWidgets.QScrollArea(cwidget)
         self.current_width = float(MainWindow.width())
-        dpi = MainWindow.physicalDpiX()  # //*central.height()/sizeObject.height()
+        # dpi = MainWindow.physicalDpiX()  # //*central.height()/sizeObject.height()
         try:
             self.doc = popplerqt5.Poppler.Document.load(self.filename)
             if self.doc is None:
@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
         # self.fullLayout.addWidget(self.thumbArea)
         # self.fullLayout.addWidget(self.area)
 
-        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal)
+        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Orientation.Horizontal)
         self.splitter.addWidget(self.thumbArea)
         self.splitter.addWidget(self.mainPdfWidget)  # self.area)
         self.fullLayout.addWidget(self.splitter)
@@ -133,7 +133,7 @@ class Pdf_Widget(QtWidgets.QMainWindow):
         # self.statusPageNo.setFrameStyle(QtWidgets.QFrame.NoFrame)
         self.statusPageNo.setText("1")
         self.statusPageNo.returnPressed.connect(self.goToPage)
-        self.statusPageNo.setAlignment(QtCore.Qt.AlignCenter)
+        self.statusPageNo.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.statusPageNo.setFixedWidth(60)
         self.ui.controlLayout.addWidget(thumbButton)
         self.ui.controlLayout.addStretch(1)
@@ -240,19 +240,19 @@ class Pdf_Widget(QtWidgets.QMainWindow):
     def contextMenuEvent(self, event):
         contextMenu = QtWidgets.QMenu(self)
         impMenu = QtWidgets.QMenu("Zoom ", self)
-        zoom_width = QtWidgets.QAction("Fit Width", self, checkable=True)
+        zoom_width = QtGui.QAction("Fit Width", self, checkable=True)
         impMenu.addAction(zoom_width)
-        zoom_50 = QtWidgets.QAction("Zoom 50%", self, checkable=True)
+        zoom_50 = QtGui.QAction("Zoom 50%", self, checkable=True)
         impMenu.addAction(zoom_50)
-        zoom_100 = QtWidgets.QAction("Zoom 100%", self, checkable=True)
+        zoom_100 = QtGui.QAction("Zoom 100%", self, checkable=True)
         impMenu.addAction(zoom_100)
-        zoom_150 = QtWidgets.QAction("Zoom 150%", self, checkable=True)
+        zoom_150 = QtGui.QAction("Zoom 150%", self, checkable=True)
         impMenu.addAction(zoom_150)
-        zoom_200 = QtWidgets.QAction("Zoom 200%", self, checkable=True)
+        zoom_200 = QtGui.QAction("Zoom 200%", self, checkable=True)
         impMenu.addAction(zoom_200)
-        zoom_400 = QtWidgets.QAction("Zoom 400%", self, checkable=True)
+        zoom_400 = QtGui.QAction("Zoom 400%", self, checkable=True)
         impMenu.addAction(zoom_400)
-        zoom_800 = QtWidgets.QAction("Zoom 800%", self, checkable=True)
+        zoom_800 = QtGui.QAction("Zoom 800%", self, checkable=True)
         impMenu.addAction(zoom_800)
 
         contextMenu.addMenu(impMenu)

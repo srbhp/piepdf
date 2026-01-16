@@ -2,30 +2,17 @@
 """Tags for the paper"""
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QApplication,
-    QComboBox,
     QDialog,
-    QDialogButtonBox,
-    QFormLayout,
-    QGridLayout,
-    QGroupBox,
     QHBoxLayout,
-    QLabel,
-    QLineEdit,
-    QMenu,
-    QMenuBar,
     QPushButton,
-    QSpinBox,
-    QTextEdit,
-    QVBoxLayout,
     QWidget,
     QSizePolicy,
 )
 
-from PyQt5.QtGui import QIcon
 import sys
 
 
@@ -45,7 +32,7 @@ class tagBottom(QWidget):
         self.layout = QHBoxLayout(self)
         b1 = QPushButton(text)
         b2 = ClickableQLabel()
-        b2.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        b2.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self.layout.addWidget(b1)
         self.layout.addWidget(b2)
         pix = QtGui.QIcon.fromTheme("window-close")

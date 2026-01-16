@@ -44,7 +44,7 @@ jobs:
     - name: Build package python3-poppler-qt5
       run: |
         sudo apt update 
-        sudo apt install --yes python3-poppler-qt5 qt5-qmake 
+        sudo apt install --yes python3-poppler-qt5 qt5-qmake libpoppler-qt5-dev
     - name: Build package piepdf
       run: |
         uv sync --dev 

@@ -44,15 +44,7 @@ jobs:
     - name: Build package python3-poppler-qt5
       run: |
         sudo apt update 
-        sudo apt install --yes python3-poppler-qt5
-        uvx --with distlib python <<EOF
-        from distlib.index import PackageIndex
-        from distlib.locators import locate
-        dist = locate('python-poppler-qt5')
-        fn = dist.source_url.rsplit('/', 1)[-1]
-        PackageIndex(dist.locator.base_url).download_file(dist.source_url, fn, dist.digest)
-        print(f'SDIST_FILENAME={fn}')
-        EOF
+        sudo apt install --yes python3-poppler-qt5 qt5-qmake 
     - name: Build package piepdf
       run: |
         uv sync --dev 

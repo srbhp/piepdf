@@ -13,8 +13,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def setupUi(self):
         self.setObjectName("MainWindow")
-        # sizeObject = QtWidgets.QDesktopWidget().screenGeometry(-1)
-        # self.resize(int(sizeObject.height()*0.8),int(sizeObject.width()*0.5))
+        sizeObject = QtWidgets.QDesktopWidget().screenGeometry(-1)
+        self.resize(int(sizeObject.height() * 0.8), int(sizeObject.width() * 0.5))
         self.setUnifiedTitleAndToolBarOnMac(True)
         self.centralWidget = QtWidgets.QWidget(self)
         self.centralWidget.setObjectName("centralWidget")
